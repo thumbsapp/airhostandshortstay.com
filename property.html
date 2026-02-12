@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunset Villa Diani · AirHostandShortStay</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <header class="site-header">
+        <!-- same persistent header -->
+        <div class="header-container">
+            <div class="logo-area">
+                <a href="index.html" class="logo">AH<span>&</span>SS</a>
+                <span class="region-badge">Diani</span>
+            </div>
+            <div class="persistent-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Anywhere · Any week · Add guests">
+                <button class="search-btn"><i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="header-actions">
+                <button class="lang-currency"><i class="fas fa-globe"></i> EN/USD</button>
+                <button class="account-btn"><i class="fas fa-user-circle"></i> Sign in</button>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <a href="index.html">Discover</a>
+            <a href="search.html">Stays</a>
+            <a href="#">Experiences</a>
+            <a href="#">AirChef</a>
+            <a href="#">AirRide</a>
+            <a href="#">AirRelax</a>
+        </nav>
+    </header>
+
+    <main class="property-detail">
+        <!-- image gallery -->
+        <div class="gallery">
+            <div class="main-image">
+                <img src="images/properties/villa1.jpg" alt="Sunset Villa" id="gallery-main">
+            </div>
+            <div class="thumbnails">
+                <img src="images/properties/villa2.jpg" alt="">
+                <img src="images/properties/villa3.jpg" alt="">
+                <img src="images/properties/villa4.jpg" alt="">
+                <img src="images/properties/villa5.jpg" alt="">
+            </div>
+        </div>
+
+        <div class="detail-grid">
+            <div class="detail-left">
+                <div class="tier-badge diamond">Diamond Host</div>
+                <h1>Sunset Villa, ocean view + private pool</h1>
+                <div class="host-verification">
+                    <i class="fas fa-check-circle"></i> Verified host · Native listing
+                </div>
+                <div class="amenities-list">
+                    <span><i class="fas fa-wifi"></i> WiFi</span>
+                    <span><i class="fas fa-water"></i> Pool</span>
+                    <span><i class="fas fa-car"></i> Parking</span>
+                    <span><i class="fas fa-kitchen-set"></i> Full kitchen</span>
+                </div>
+                <div class="tier-explanation">
+                    <h4>Diamond tier</h4>
+                    <p>Top 5% of homes · 24/7 concierge · premium amenities</p>
+                </div>
+                <!-- AirChef / AirRide / AirRelax bundling -->
+                <div class="lifestyle-bundles">
+                    <h3>Bundle & save</h3>
+                    <div class="bundle-option">
+                        <input type="checkbox" id="bundle-chef"> <label for="bundle-chef"><i class="fas fa-utensils"></i> AirChef (private chef) — $45</label>
+                    </div>
+                    <div class="bundle-option">
+                        <input type="checkbox" id="bundle-ride"> <label for="bundle-ride"><i class="fas fa-car-side"></i> AirRide (airport transfer) — $25</label>
+                    </div>
+                    <div class="bundle-option">
+                        <input type="checkbox" id="bundle-relax"> <label for="bundle-relax"><i class="fas fa-spa"></i> AirRelax (in‑house massage) — $60</label>
+                    </div>
+                    <button id="add-bundles">Add to stay</button>
+                </div>
+            </div>
+
+            <div class="detail-right">
+                <div class="booking-card">
+                    <div class="price-row">
+                        <span class="full-price">$220 <small>/ night</small></span>
+                        <span class="installment-badge">Lipa Mdogo</span>
+                    </div>
+                    <!-- installment UI -->
+                    <div class="lipa-mdogo-ui">
+                        <p>4 installments of <strong>$55</strong> interest‑free</p>
+                        <button id="lipa-btn" class="btn-lipa">Book with Lipa Mdogo</button>
+                    </div>
+                    <!-- negotiation UI -->
+                    <div class="negotiation-ui">
+                        <p>Propose your price</p>
+                        <div class="negotiation-input">
+                            <input type="number" id="offer-amount" placeholder="$">
+                            <button id="send-offer">Send offer</button>
+                        </div>
+                        <small>Host usually responds in 5 min</small>
+                    </div>
+                    <button class="btn-book">Reserve now</button>
+                    <div class="favorite-share">
+                        <button id="favorite-btn"><i class="far fa-heart"></i> Pin (max 5)</button>
+                        <button id="share-btn"><i class="far fa-share-square"></i> Share</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <button id="dash-assistant" class="dash-float">
+        <i class="fas fa-robot"></i> Ask Dash
+    </button>
+
+    <footer class="site-footer">[...footer same as index]</footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/negotiation.js"></script>
+    <script src="js/lipa-mdogo.js"></script>
+    <script src="js/favorites.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/ui.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=>{
+            App.initProperty();
+        });
+    </script>
+</body>
+</html>
