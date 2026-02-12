@@ -1,6 +1,0 @@
-<!-- images/logo.svg -->
-<svg width="180" height="50" viewBox="0 0 180 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="180" height="50" rx="8" fill="#0b1c2f"/>
-  <text x="20" y="32" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white">AirHost</text>
-  <text x="120" y="32" font-family="Arial, sans-serif" font-size="18" fill="#0d9488">&amp;ShortStay</text>
-</svg>
