@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Search vacation rentals · AirHostandShortStay</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0b1a33">
+    <!-- Leaflet + cluster -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Tripping/HomeToGo specific overrides -->
+    <style>
+        /* Tripping-style compact filters + cards */
+        .search-sidebar { width: 420px; background: #fff; padding: 1.5rem 1rem; }
+        .filters-accordion { background: white; border-radius: 16px; padding: 1.2rem; box-shadow: 0 1px 4px rgba(0,0,0,0.04); margin-bottom: 1.5rem; }
+        .filter-group { margin-bottom: 1.2rem; border-bottom: 1px solid #edf2f7; padding-bottom: 1rem; }
+        .filter-group label { font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 0.5rem; color: #1e293b; }
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+        .checkbox-group label { display: flex; align-items: center; gap: 0.3rem; font-weight: 400; font-size: 0.9rem; }
+        .radio-group { display: flex; gap: 1rem; }
+        .range-inputs { display: flex; gap: 0.5rem; align-items: center; }
+        .range-inputs input { width: 80px; padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 20px; text-align: center; }
+        .filter-select { width: 100%; padding: 0.6rem; border-radius: 30px; border: 1px solid #e2e8f0; background: white; }
+        .btn-primary { background: #2563eb; color: white; padding: 0.7rem 1.5rem; border-radius: 40px; font-weight: 600; width: 100%; margin-top: 0.5rem; }
+        
+        /* Property cards – Tripping.com style */
+        .property-list { display: flex; flex-direction: column; gap: 1rem; }
+        .property-card { display: flex; gap: 1rem; padding: 1rem; background: white; border-radius: 20px; transition: all 0.2s; border: 1px solid #f1f5f9; }
+        .property-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.06); transform: translateY(-2px); }
+        .property-card img { width: 140px; height: 140px; object-fit: cover; border-radius: 16px; }
+        .property-info { flex: 1; display: flex; flex-direction: column; gap: 0.3rem; }
+        .property-info h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; }
+        .property-meta { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; font-size: 0.75rem; color: #64748b; }
+        .price-large { font-size: 1.2rem; font-weight: 800; color: #0b1a33; }
+        .view-deal-btn { background: #2563eb; color: white; border: none; padding: 0.5rem 1rem; border-radius: 30px; font-weight: 600; font-size: 0.8rem; cursor: pointer; align-self: flex-end; margin-top: 0.3rem; }
+        .wishlist-icon { color: #94a3b8; font-size: 1.2rem; cursor: pointer; transition: 0.2s; }
+        .wishlist-icon:hover { color: #ef4444; }
+        .host-badge { background: #f1f5f9; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+        .aggregated-badge { background: #e2e8f0; color: #334155; }
+        .native-badge { background: #dbeafe; color: #1e40af; }
+        .installment-badge-sm { background: #dcfce7; color: #166534; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+        .negotiation-badge-sm { background: #fff7ed; color: #9a3412; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+        .results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding: 0 0.5rem; }
+        .sort-dropdown { padding: 0.4rem 1.2rem; border-radius: 30px; border: 1px solid #e2e8f0; background: white; font-size: 0.85rem; }
+        .map-legend { background: rgba(255,255,255,0.9); backdrop-filter: blur(8px); border-radius: 40px; padding: 0.5rem 1.2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+        .search-radius-control { background: white; border-radius: 40px; padding: 0.5rem 1.2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+    </style>
+</head>
+<body>
+    <!-- GLOBAL HEADER (same) -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <a href="index.html" class="logo">AH<span>&</span>SS</a>
+                <span class="region-badge">Nairobi <i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="persistent-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Diani · 2-9 Mar · 2 guests" id="global-search-input" value="Diani">
+                <button class="search-btn"><i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="header-actions">
+                <button class="lang-currency"><i class="fas fa-globe"></i> EN/USD</button>
+                <button class="account-btn"><i class="fas fa-user-circle"></i> Sign in</button>
+                <button class="incentives-badge"><i class="fas fa-gift"></i> 2 offers</button>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <a href="index.html">Discover</a>
+            <a href="search.html" class="active">Stays</a>
+            <a href="#">Experiences</a>
+            <a href="#">AirChef</a>
+            <a href="#">AirRide</a>
+            <a href="#">AirRelax</a>
+        </nav>
+    </header>
+
+    <!-- SEARCH PAGE: MAP + LIST – TRIPPING/HOMETOGO STYLE -->
+    <div class="search-layout">
+        <!-- LEFT COLUMN: filter sidebar + results list (dense, clean) -->
+        <div class="search-sidebar">
+            <!-- Filter accordion – Tripping compact style -->
+            <div class="filters-accordion">
+                <h3 style="display: flex; justify-content: space-between; margin-bottom: 1rem;">Filters <button id="clear-all-filters" class="clear-link" style="color:#2563eb; font-size:0.85rem;">Clear all</button></h3>
+                
+                <div class="filter-group">
+                    <label>💰 Price per night</label>
+                    <div class="range-inputs">
+                        <input type="number" placeholder="min $" id="min-price" value="20">
+                        <span>—</span>
+                        <input type="number" placeholder="max $" id="max-price" value="500">
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label>🏅 Property tier</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" value="Silver" checked> Silver <span class="tier-dot silver" style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#9aa4af; margin-left:4px;"></span></label>
+                        <label><input type="checkbox" value="Gold" checked> Gold <span class="tier-dot gold" style="background:#fbbf24;"></span></label>
+                        <label><input type="checkbox" value="Diamond" checked> Diamond <span class="tier-dot diamond" style="background:#2dd4bf;"></span></label>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label>📶 Amenities</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" value="wifi"> WiFi</label>
+                        <label><input type="checkbox" value="kitchen"> Kitchen</label>
+                        <label><input type="checkbox" value="pool"> Pool</label>
+                        <label><input type="checkbox" value="ac"> AC</label>
+                        <label><input type="checkbox" value="parking"> Parking</label>
+                        <label><input type="checkbox" value="beachfront"> Beachfront</label>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label>🛏️ Bedrooms</label>
+                    <select id="bedrooms" class="filter-select">
+                        <option>Any</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3+</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>🚽 Bathrooms</label>
+                    <select id="bathrooms" class="filter-select">
+                        <option>Any</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3+</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>🏠 Host type</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="hostType" value="native" checked> 🏡 Native</label>
+                        <label><input type="radio" name="hostType" value="aggregated"> 🏢 Aggregated</label>
+                        <label><input type="radio" name="hostType" value="any"> Any</label>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label>⭐ Rating</label>
+                    <select id="rating-filter" class="filter-select">
+                        <option>Any</option>
+                        <option>4.5+</option>
+                        <option>4.0+</option>
+                        <option>3.5+</option>
+                    </select>
+                </div>
+                
+                <button id="apply-filters-btn" class="btn-primary">Apply filters</button>
+            </div>
+            
+            <!-- Results header with count & sort (Tripping style) -->
+            <div class="results-header">
+                <span id="result-count" style="font-weight: 600;">142 vacation rentals</span>
+                <select id="sort-select" class="sort-dropdown">
+                    <option>Recommended</option>
+                    <option>Price: low to high</option>
+                    <option>Price: high to low</option>
+                    <option>Hot Homes first</option>
+                    <option>Top rated</option>
+                </select>
+            </div>
+            
+            <!-- Property list – Tripping.com style cards -->
+            <div id="property-list" class="property-list">
+                <!-- JS injects listing cards with wishlist, badges, Lipa Mdogo, negotiation -->
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: MAP (OSM) – HomeToGo/Tripping full-height map -->
+        <div class="search-map-container">
+            <div id="search-map"></div>
+            <!-- Map overlays: legend + radius + clustering -->
+            <div class="map-legend">
+                <span><span class="dot silver"></span> Silver</span>
+                <span><span class="dot gold"></span> Gold</span>
+                <span><span class="dot diamond"></span> Diamond</span>
+                <span><i class="fas fa-circle" style="color:#22c55e;"></i> Available</span>
+                <span><i class="fas fa-bolt" style="color:#f59e0b;"></i> Hot Home</span>
+            </div>
+            <div class="search-radius-control">
+                <i class="fas fa-expand"></i> Radius
+                <select id="search-radius" style="margin-left: 0.5rem; border: none; background: transparent; font-weight: 600;">
+                    <option>5 km</option>
+                    <option selected>10 km</option>
+                    <option>25 km</option>
+                    <option>50 km</option>
+                </select>
+            </div>
+            <!-- Cluster count badge (dynamic) -->
+        </div>
+    </div>
+
+    <!-- DASH ASSISTANT -->
+    <button id="dash-assistant" class="dash-float">
+        <i class="fas fa-robot"></i> Dash AI
+        <span class="tooltip">Ask me anything ✨</span>
+    </button>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>AirHost&ShortStay</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h5>Company</h5>
+                <a href="#">About</a>
+                <a href="#">Careers</a>
+                <a href="#">Press</a>
+            </div>
+            <div class="footer-section">
+                <h5>Support</h5>
+                <a href="#">Help</a>
+                <a href="#">Safety</a>
+                <a href="#">Terms</a>
+            </div>
+            <div class="footer-section">
+                <h5>Incentives</h5>
+                <a href="#">Referrals</a>
+                <a href="#">Lipa Mdogo rewards</a>
+                <a href="#">Host bonus</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/geolocation.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/realtime.js"></script>
+    <script src="js/listings.js"></script>
+    <script src="js/negotiation.js"></script>
+    <script src="js/lipa-mdogo.js"></script>
+    <script src="js/favorites.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/ui.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=>{
+            App.initSearch();
+        });
+    </script>
+</body>
+</html>
