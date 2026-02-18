@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Sunset Villa Diani · Diamond tier · AirHostandShortStay</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- HomeToGo style overrides -->
+    <style>
+        /* HomeToGo – polished, spacious, high-end */
+        .property-detail { max-width: 1280px; margin: 2rem auto; padding: 0 2rem; }
+        .gallery { display: grid; grid-template-columns: 2fr 1fr; gap: 8px; margin-bottom: 2rem; }
+        .main-image { position: relative; }
+        .main-image img { width: 100%; height: 500px; object-fit: cover; border-radius: 24px; }
+        .thumbnails { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .thumbnails img { width: 100%; height: 246px; object-fit: cover; border-radius: 16px; cursor: pointer; transition: 0.2s; }
+        .gallery-heart { position: absolute; top: 20px; right: 20px; background: white; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 1.3rem; color: #64748b; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .gallery-heart:hover { color: #ef4444; }
+        .detail-grid { display: grid; grid-template-columns: 1fr 400px; gap: 2.5rem; margin-top: 1.5rem; }
+        .property-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .host-verification { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; flex-wrap: wrap; }
+        .host-rating { background: #f1f5f9; padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.8rem; }
+        .amenities-list { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1.5rem 0; }
+        .amenities-list span { background: #f8fafc; padding: 0.5rem 1rem; border-radius: 40px; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; border: 1px solid #e2e8f0; }
+        .tier-explanation { background: #f0f9ff; border-radius: 20px; padding: 1.2rem; margin: 1.5rem 0; border-left: 6px solid #2dd4bf; }
+        .lifestyle-bundles { background: white; border-radius: 20px; padding: 1.5rem; border: 1px solid #e2e8f0; margin-top: 1.5rem; }
+        .bundle-option { display: flex; align-items: center; gap: 0.8rem; padding: 0.6rem 0; border-bottom: 1px solid #f1f5f9; }
+        .bundle-discount { background: #dcfce7; color: #166534; padding: 0.2rem 0.6rem; border-radius: 30px; font-size: 0.7rem; font-weight: 700; margin-left: auto; }
+        .booking-card { background: white; border-radius: 24px; padding: 1.8rem; box-shadow: 0 8px 28px rgba(0,0,0,0.06); border: 1px solid #f1f5f9; position: sticky; top: 100px; }
+        .price-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.2rem; }
+        .full-price { font-size: 2rem; font-weight: 800; color: #0b1a33; }
+        .installment-badge { background: #dcfce7; color: #166534; padding: 0.4rem 1rem; border-radius: 40px; font-weight: 700; font-size: 0.8rem; }
+        .lipa-mdogo-ui { background: #f0fdf4; padding: 1rem; border-radius: 16px; margin-bottom: 1.2rem; }
+        .btn-lipa { width: 100%; background: linear-gradient(145deg, #059669, #047857); color: white; padding: 0.8rem; border-radius: 60px; font-weight: 700; border: none; }
+        .negotiation-ui { margin: 1.2rem 0; padding: 1rem; background: #fff7ed; border-radius: 16px; }
+        .negotiation-input { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+        .negotiation-input input { flex: 1; padding: 0.7rem; border-radius: 40px; border: 1px solid #fdba74; }
+        .btn-negotiate { background: #ea580c; color: white; padding: 0.7rem 1.2rem; border-radius: 40px; font-weight: 600; }
+        .btn-book { width: 100%; background: #2563eb; color: white; padding: 0.9rem; border-radius: 60px; font-weight: 700; margin-top: 0.8rem; }
+        .favorite-share { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; }
+        .incentive-card { margin-top: 1.5rem; background: linear-gradient(145deg, #fef9c3, #fef08a); padding: 1.2rem; border-radius: 20px; }
+        .host-card { background: #f8fafc; border-radius: 20px; padding: 1.2rem; margin-top: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+        .host-avatar { width: 60px; height: 60px; border-radius: 50%; background: #cbd5e1; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+        @media (max-width: 1024px) { .detail-grid { grid-template-columns: 1fr; } .booking-card { position: static; } .gallery { grid-template-columns: 1fr; } .thumbnails img { height: 120px; } }
+    </style>
+</head>
+<body>
+    <!-- HEADER (same) -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <a href="index.html" class="logo">AH<span>&</span>SS</a>
+                <span class="region-badge">Diani</span>
+            </div>
+            <div class="persistent-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Anywhere · Any week · Add guests">
+                <button class="search-btn"><i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="header-actions">
+                <button class="lang-currency"><i class="fas fa-globe"></i> EN/USD</button>
+                <button class="account-btn"><i class="fas fa-user-circle"></i> Sign in</button>
+                <button class="incentives-badge"><i class="fas fa-gift"></i> 2 offers</button>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <a href="index.html">Discover</a>
+            <a href="search.html">Stays</a>
+            <a href="#">Experiences</a>
+            <a href="#">AirChef</a>
+            <a href="#">AirRide</a>
+            <a href="#">AirRelax</a>
+        </nav>
+    </header>
+
+    <main class="property-detail">
+        <!-- Image gallery – HomeToGo style -->
+        <div class="gallery">
+            <div class="main-image">
+                <img src="images/properties/villa1.jpg" alt="Sunset Villa Diani" id="gallery-main">
+                <button class="gallery-heart" id="favorite-btn-property"><i class="far fa-heart"></i></button>
+            </div>
+            <div class="thumbnails">
+                <img src="images/properties/villa2.jpg" alt="" class="thumbnail">
+                <img src="images/properties/villa3.jpg" alt="" class="thumbnail">
+                <img src="images/properties/villa4.jpg" alt="" class="thumbnail">
+                <img src="images/properties/villa5.jpg" alt="" class="thumbnail">
+            </div>
+        </div>
+
+        <!-- Main content + booking sidebar -->
+        <div class="detail-grid">
+            <!-- LEFT: property details, amenities, host, bundles -->
+            <div class="detail-left">
+                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                    <span class="tier-badge diamond" style="padding: 0.4rem 1.2rem;">Diamond Host · verified</span>
+                    <span class="host-badge native" style="background:#dbeafe; color:#1e40af; padding:0.3rem 0.8rem; border-radius:40px; font-size:0.8rem;"><i class="fas fa-check-circle"></i> Native</span>
+                </div>
+                <h1 class="property-title">Sunset Villa, ocean view + private pool</h1>
+                
+                <div class="host-verification">
+                    <span><i class="fas fa-star" style="color: #fbbf24;"></i> 4.98 (128 reviews)</span>
+                    <span><i class="fas fa-map-marker-alt"></i> Diani Beach, Kenya</span>
+                    <span><i class="fas fa-user-check"></i> Superhost</span>
+                </div>
+
+                <!-- Amenities grid – HomeToGo style -->
+                <div class="amenities-list">
+                    <span><i class="fas fa-wifi"></i> WiFi</span>
+                    <span><i class="fas fa-water"></i> Pool</span>
+                    <span><i class="fas fa-car"></i> Free parking</span>
+                    <span><i class="fas fa-kitchen-set"></i> Full kitchen</span>
+                    <span><i class="fas fa-snowflake"></i> Air conditioning</span>
+                    <span><i class="fas fa-tv"></i> Smart TV</span>
+                    <span><i class="fas fa-tshirt"></i> Washer</span>
+                    <span><i class="fas fa-dog"></i> Pets allowed</span>
+                </div>
+
+                <!-- Tier explanation card -->
+                <div class="tier-explanation">
+                    <h4 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;"><i class="fas fa-crown" style="color: #2dd4bf;"></i> Diamond tier benefits</h4>
+                    <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; list-style: none; padding-left: 0;">
+                        <li><i class="fas fa-check-circle" style="color: #2dd4bf;"></i> Top 5% of homes</li>
+                        <li><i class="fas fa-concierge-bell"></i> 24/7 concierge</li>
+                        <li><i class="fas fa-wine-glass-alt"></i> Premium amenities</li>
+                        <li><i class="fas fa-clock"></i> Early check-in</li>
+                    </ul>
+                </div>
+
+                <!-- Lifestyle bundling (AirChef / AirRide / AirRelax) -->
+                <div class="lifestyle-bundles">
+                    <h3 style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;"><i class="fas fa-boxes"></i> Bundle & save up to 20%</h3>
+                    <div class="bundle-option">
+                        <input type="checkbox" id="bundle-chef"> 
+                        <label for="bundle-chef"><i class="fas fa-utensils"></i> AirChef (private chef) — $45/night</label>
+                        <span class="bundle-discount">save $10</span>
+                    </div>
+                    <div class="bundle-option">
+                        <input type="checkbox" id="bundle-ride"> 
+                        <label for="bundle-ride"><i class="fas fa-car-side"></i> AirRide (airport transfer) — $25/ride</label>
+                        <span class="bundle-discount">save $5</span>
+                    </div>
+                    <div class="bundle-option">
+                        <input type="checkbox" id="bundle-relax"> 
+                        <label for="bundle-relax"><i class="fas fa-spa"></i> AirRelax (in‑house massage) — $60/session</label>
+                        <span class="bundle-discount">save $15</span>
+                    </div>
+                    <button id="add-bundles" class="btn-secondary" style="background:#f1f5f9; padding:0.7rem 1.5rem; border-radius:40px; margin-top:1rem; font-weight:600;">Add to stay · see total</button>
+                    <div id="bundle-total" class="bundle-total" style="margin-top: 0.8rem; font-weight: 700;"></div>
+                </div>
+
+                <!-- Host card -->
+                <div class="host-card">
+                    <div class="host-avatar">👩🏾‍🌾</div>
+                    <div>
+                        <h4 style="margin-bottom: 0.2rem;">Hosted by Maria</h4>
+                        <p style="color: #475569; font-size: 0.9rem;">⭐ 4.98 · 128 reviews · Verified since 2022</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.3rem;">⚡ 89% response rate · responds in 5 min</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: booking card – HomeToGo style, with Lipa Mdogo, negotiation -->
+            <div class="detail-right">
+                <div class="booking-card">
+                    <div class="price-row">
+                        <span class="full-price">$220</span> <span style="font-size: 1rem; color: #475569;">/ night</span>
+                        <span class="installment-badge"><i class="fas fa-coins"></i> Lipa Mdogo</span>
+                    </div>
+                    
+                    <!-- Lipa Mdogo Mdogo ENGINE UI -->
+                    <div class="lipa-mdogo-ui">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;"><i class="fas fa-coins" style="color: #059669;"></i> 4 interest-free installments</p>
+                        <p style="font-size: 1.2rem; font-weight: 700; color: #047857;">$55 / month</p>
+                        <button id="lipa-btn" class="btn-lipa animate__animated animate__pulse animate__infinite">💸 Book with Lipa Mdogo</button>
+                        <div id="installment-details" style="font-size: 0.8rem; margin-top: 0.6rem; color: #065f46;"></div>
+                    </div>
+                    
+                    <!-- NEGOTIATION ENGINE UI -->
+                    <div class="negotiation-ui">
+                        <p style="font-weight: 600; margin-bottom: 0.3rem;"><i class="fas fa-hand-holding-usd"></i> Propose your price</p>
+                        <div class="negotiation-input">
+                            <input type="number" id="offer-amount" placeholder="Your offer ($)" min="50" max="500">
+                            <button id="send-offer" class="btn-negotiate">Send</button>
+                        </div>
+                        <div id="negotiation-feedback" style="margin-top: 0.5rem; font-size: 0.8rem;"></div>
+                        <small style="color: #64748b;">⚡ 78% accept rate · reply in ~5 min</small>
+                    </div>
+
+                    <!-- Total + book -->
+                    <div style="display: flex; justify-content: space-between; margin: 1rem 0 0.5rem; padding-top: 0.5rem; border-top: 1px solid #e2e8f0;">
+                        <span>Total (7 nights)</span>
+                        <span style="font-weight: 800; font-size: 1.2rem;">$1,540</span>
+                    </div>
+                    <button class="btn-book">Reserve now</button>
+                    
+                    <div class="favorite-share">
+                        <button id="favorite-btn-property" style="background: none; border: 1px solid #e2e8f0; padding: 0.5rem 1.2rem; border-radius: 40px;"><i class="far fa-heart"></i> Pin (max 5)</button>
+                        <button id="share-btn" style="background: none; border: 1px solid #e2e8f0; padding: 0.5rem 1.2rem; border-radius: 40px;"><i class="far fa-share-square"></i> Share</button>
+                    </div>
+                </div>
+
+                <!-- Incentive card -->
+                <div class="incentive-card">
+                    <h4 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;"><i class="fas fa-gift"></i> Unlock rewards</h4>
+                    <p style="font-size: 0.9rem;">Book via Lipa Mdogo and get $10 credit for AirChef + 5% off your next stay.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- DASH AI ASSISTANT -->
+    <button id="dash-assistant" class="dash-float">
+        <i class="fas fa-robot"></i> Ask Dash
+    </button>
+
+    <footer class="site-footer">
+        <!-- same as index -->
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>AirHost&ShortStay</h4>
+                <p>Real‑time stays, instant negotiation, Lipa Mdogo.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h5>Product</h5>
+                <a href="#">Discover</a>
+                <a href="#">Search</a>
+                <a href="#">AirChef</a>
+                <a href="#">AirRide</a>
+                <a href="#">AirRelax</a>
+            </div>
+            <div class="footer-section">
+                <h5>Support</h5>
+                <a href="#">Help</a>
+                <a href="#">Safety</a>
+                <a href="#">Terms</a>
+            </div>
+            <div class="footer-section">
+                <h5>Incentives</h5>
+                <a href="#">Referrals</a>
+                <a href="#">Lipa Mdogo rewards</a>
+                <a href="#">Host bonus</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 AirHostandShortStay · PWA offline ready · 🚀 instant booking
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/negotiation.js"></script>
+    <script src="js/lipa-mdogo.js"></script>
+    <script src="js/favorites.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/ui.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=>{
+            App.initProperty();
+        });
+    </script>
+    <!-- ADDED INCENTIVE & WISHLIST INITIALIZATION (non-destructive) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=>{
+            IncentiveEngine.enhanceAllListings(MockData.properties);
+            IncentiveUI.enhancePropertyPage();
+            Wishlist.init();
+        });
+    </script>
+</body>
+</html>

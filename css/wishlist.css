@@ -1,0 +1,13 @@
+/* wishlist.css – Wishlist heart icon and styles */
+
+.wishlist-icon {
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.wishlist-icon:hover {
+    transform: scale(1.1);
+}
+.wishlist-icon.fas {
+    color: #ef4444;
+}

@@ -1,0 +1,186 @@
+/* incentives.css – Styles for incentive UI components */
+
+.incentive-badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+.incentive-badge, .cashback-badge, .hot-incentive-badge {
+    background: #fef9c3;
+    color: #854d0e;
+    padding: 0.2rem 0.8rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+.cashback-badge {
+    background: #dcfce7;
+    color: #166534;
+}
+.hot-incentive-badge {
+    background: #fee2e2;
+    color: #991b1b;
+}
+.incentive-mini-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.3rem;
+}
+.incentive-mini {
+    background: #f1f5f9;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    color: #334155;
+}
+.incentive-more {
+    background: #e2e8f0;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+/* incentive breakdown section */
+.incentive-breakdown {
+    margin: 2rem 0;
+    padding: 1.5rem;
+}
+.incentive-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+.incentive-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #f8fafc;
+    padding: 0.6rem;
+    border-radius: 40px;
+}
+.incentive-icon {
+    font-size: 1.2rem;
+}
+.incentive-desc {
+    flex: 1;
+    font-size: 0.9rem;
+}
+.incentive-value {
+    font-weight: 700;
+    color: #059669;
+}
+.value-breakdown {
+    background: #f1f5f9;
+    border-radius: 20px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+.value-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3rem 0;
+    border-bottom: 1px dashed #cbd5e1;
+}
+.value-row.total {
+    font-weight: 700;
+    border-bottom: none;
+    margin-top: 0.5rem;
+}
+
+/* homepage incentive sections */
+.incentive-sections {
+    margin-top: 2rem;
+    padding: 1rem;
+}
+.incentive-carousel {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+.incentive-strip-card {
+    min-width: 200px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.incentive-strip-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+.incentive-strip-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 16px 16px 0 0;
+}
+.strip-info {
+    padding: 0.5rem;
+}
+.strip-info h4 {
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+}
+.incentive-score {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+/* filter sidebar */
+.incentive-filters .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+/* risk and escrow badges */
+.risk-badge {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+.escrow-badge {
+    background: #dbeafe;
+    color: #1e40af;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+/* dispute modal */
+.dispute-modal {
+    max-width: 500px;
+}
+.dispute-modal textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    margin: 0.5rem 0;
+}
+.dispute-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+.dispute-note {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 1rem;
+}
