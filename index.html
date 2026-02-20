@@ -33,66 +33,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     
-    <!-- Existing JS includes (keep all previous) -->
-    <script src="js/app.js"></script>
-    <script src="js/data.js"></script>
-    <script src="js/geolocation.js"></script>
-    <script src="js/map.js"></script>
-    <script src="js/filters.js"></script>
-    <script src="js/realtime.js"></script>
-    <script src="js/listings.js"></script>
-    <script src="js/negotiation.js"></script>
-    <script src="js/lipa-mdogo.js"></script>
-    <script src="js/favorites.js"></script>
-    <script src="js/services.js"></script>
-    <script src="js/ui.js"></script>
-    
-    <!-- NEW ENGINE MODULES (from previous) -->
-    <script src="discovery/realtime-engine.js"></script>
-    <script src="discovery/radius-matching.js"></script>
-    <script src="discovery/hot-homes-engine.js"></script>
-    <script src="pricing/negotiation-engine.js"></script>
-    <script src="pricing/lipa-mdogo-engine.js"></script>
-    <script src="pricing/tier-pricing.js"></script>
-    <script src="listings/meta-aggregation.js"></script>
-    <script src="listings/native-hosts.js"></script>
-    <script src="listings/availability-engine.js"></script>
-    <script src="services/airchef.js"></script>
-    <script src="services/airride.js"></script>
-    <script src="services/airrelax.js"></script>
-    <script src="engagement/alerts.js"></script>
-    <script src="engagement/incentives.js"></script>
-    <script src="engagement/favorites.js"></script>
-    
-    <!-- NEW INCENTIVE SYSTEM FILES -->
-    <script src="incentives/incentive.config.js"></script>
-    <script src="incentives/incentive.engine.js"></script>
-    <script src="incentives/incentive.score.js"></script>
-    <script src="incentives/incentive.ui.js"></script>
-    <script src="incentives/incentive.filters.js"></script>
-    <script src="incentives/incentive.fraud.js"></script>
-    <script src="incentives/incentive.dashboard.js"></script>
-    <script src="incentives/incentive.dispute.js"></script>
-    <script src="incentives/incentive.analytics.js"></script>
-    
-    <!-- ADVANCED SEARCH & WISHLIST -->
-    <script src="search.advanced.js"></script>
-    <script src="search.autocomplete.js"></script>
-    <script src="search.drawer.mobile.js"></script>
-    <script src="wishlist.js"></script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            App.initHomepage();
-            // Initialize new modules
-            IncentiveEngine.enhanceAllListings(MockData.properties);
-            IncentiveUI.init();
-            IncentiveFilters.init();
-            AdvancedSearch.init();
-            SearchAutocomplete.init();
-            MobileDrawer.init();
-            Wishlist.init();
-        });
-    </script>
+    <!-- SINGLE MODULE ENTRY POINT -->
+    <script type="module" src="./js/main.js"></script>
 </body>
 </html>
