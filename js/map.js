@@ -5,6 +5,12 @@ const Map = {
     radiusCircle: null,
     userMarker: null,
     init(containerId, options = {}) {
+        // FIX: Check container existence before initialization
+        const container = document.getElementById(containerId);
+        if (!container) {
+            console.error('Map container not found:', containerId);
+            return;
+        }
         this.instance = L.map(containerId).setView([-1.2864, 36.8172], 12);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors',
